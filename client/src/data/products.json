@@ -1,0 +1,82 @@
+[
+  {
+    "id": 1001,
+    "category": "Hair Care",
+    "name": "Stretch Concealer",
+    "description": "A concealer with elastic micro waxes that move with your face, giving a dewy, glowing finish.",
+    "price": "22.0",
+    "image_link": "1.png"
+  },
+  {
+    "id": 1002,
+    "category": "Skin Care",
+    "name": "Wowder",
+    "description": "A setting powder that cuts shine, blurs pores, and looks like natural skin.",
+    "price": "27.0",
+    "image_link": "3.png"
+  },
+  {
+    "id": 1003,
+    "category": "Lip Care",
+    "name": "Haloscope",
+    "description": "A highlighter with crystal extracts for a hydrated, dewy glow.",
+    "price": "27.0",
+    "image_link": "3.png"
+  },
+  {
+    "id": 1004,
+    "category": "Hygiene",
+    "name": "Perfecting Skin Tint",
+    "description": "A lightweight skin tint that evens out discoloration and leaves your skin looking dewy.",
+    "price": "32.0",
+    "image_link": "1.png"
+  },
+  {
+    "id": 1005,
+    "category": "Personal Care",
+    "name": "Fly With Me Mascara",
+    "description": "A mascara that adds volume and length for a dramatic eye look.",
+    "price": "9.0",
+    "image_link": "3.png"
+  },
+  {
+    "id": 1006,
+    "category": "Hair Care",
+    "name": "Stretch Concealer",
+    "description": "A concealer with elastic micro waxes that move with your face, giving a dewy, glowing finish.",
+    "price": "22.0",
+    "image_link": "2.png"
+  },
+  {
+    "id": 1007,
+    "category": "Skin Care",
+    "name": "Wowder",
+    "description": "A setting powder that cuts shine, blurs pores, and looks like natural skin.",
+    "price": "27.0",
+    "image_link": "3.png"
+  },
+  {
+    "id": 1008,
+    "category": "Lip Care",
+    "name": "Haloscope",
+    "description": "A highlighter with crystal extracts for a hydrated, dewy glow.",
+    "price": "27.0",
+    "image_link": "4.png"
+  },
+  {
+    "id": 1009,
+    "category": "Hygiene",
+    "name": "Perfecting Skin Tint",
+    "description": "A lightweight skin tint that evens out discoloration and leaves your skin looking dewy.",
+    "price": "32.0",
+    "image_link": "3.png"
+  },
+  {
+    "id": 1010,
+    "category": "Personal Care",
+    "name": "Fly With Me Mascara",
+    "description": "A mascara that adds volume and length for a dramatic eye look.",
+    "price": "9.0",
+    "image_link": "2.png"
+  }
+]
