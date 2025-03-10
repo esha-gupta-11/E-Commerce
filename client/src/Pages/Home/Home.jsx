@@ -54,7 +54,7 @@ export default function Home({ onClose }) {
       <div className="flex mt-12 mx-40 justify-around">
         <CategoryCard image="Skincare_logo.png" title="SkinCare" route="/skincare" />
         <CategoryCard image="Hygiene_logo.png" title="Hygiene" route="/hygiene" />
-        <CategoryCard image="Personal_logo.png" title="Personal Care" route="/personalcare" />
+        <CategoryCard image="p3.png" title="Personal Care" route="/personalcare" />
         <CategoryCard image="Haircare_logo.png" title="Hair Care" route="/haircare" />
         <CategoryCard image="Lipcare_logo.png" title="Lip Care" route="/lipcare" />
       </div>

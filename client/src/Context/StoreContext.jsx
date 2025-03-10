@@ -17,6 +17,7 @@ const useStore = create((set, get) => ({
 
       if (existingItem) {
         return {
+          
           cart: state.cart.map((item) =>
             item.uniqueId === productId ? { ...item, quantity: item.quantity + 1 } : item
           ),
