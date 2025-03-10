@@ -1,88 +1,89 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import useStore from "../../Context/StoreContext";
 
-function OrderPage() {
-  const [email, setEmail] = useState("");
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [address, setAddress] = useState("");
-  const [city, setCity] = useState("");
-  const [state, setState] = useState("");
-  const [zip, setZip] = useState("");
-  const [phone, setPhone] = useState("");
-  const [cardNumber, setCardNumber] = useState("");
-  const [expDate, setExpDate] = useState("");
-  const [cvv, setCvv] = useState("");
+const Order = () => {
+  const navigate = useNavigate();
+  const { cart, getTotalCartAmount } = useStore();
+  const [formData, setFormData] = useState({
+    email: "",
+    firstName: "",
+    lastName: "",
+    address: "",
+    city: "",
+    state: "",
+    zip: "",
+    phone: "",
+    cardNumber: "",
+    expDate: "",
+    cvv: "",
+  });
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     alert("Order placed successfully!");
+    navigate("/thank-you");
   };
 
+  const subtotal = getTotalCartAmount();
+  const discount = subtotal * 0.2;
+  const total = subtotal - discount;
+
   return (
-    <div className="container mx-auto p-6 grid grid-cols-2 gap-6">
+    <div className="container mx-auto p-6 grid grid-cols-1 md:grid-cols-2 gap-6 mt-29">
       <div>
         <h1 className="text-2xl font-bold mb-6">Checkout</h1>
         <form className="bg-white p-6 rounded-lg shadow-md" onSubmit={handleSubmit}>
-          <h2 className="text-xl font-semibold mb-4">Contact Information</h2>
-          <input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} className="w-full p-2 border rounded mb-4" required />
-          
-          <h2 className="text-xl font-semibold mb-4">Delivery Address</h2>
-          <div className="grid grid-cols-2 gap-4">
-            <input type="text" placeholder="First Name" value={firstName} onChange={(e) => setFirstName(e.target.value)} className="w-full p-2 border rounded" required />
-            <input type="text" placeholder="Last Name" value={lastName} onChange={(e) => setLastName(e.target.value)} className="w-full p-2 border rounded" required />
-          </div>
-          <input type="text" placeholder="Address" value={address} onChange={(e) => setAddress(e.target.value)} className="w-full p-2 border rounded mt-4" required />
-          <div className="grid grid-cols-3 gap-4 mt-4">
-            <input type="text" placeholder="City" value={city} onChange={(e) => setCity(e.target.value)} className="w-full p-2 border rounded" required />
-            <input type="text" placeholder="State" value={state} onChange={(e) => setState(e.target.value)} className="w-full p-2 border rounded" required />
-            <input type="text" placeholder="Zip Code" value={zip} onChange={(e) => setZip(e.target.value)} className="w-full p-2 border rounded" required />
-          </div>
-          <input type="text" placeholder="Phone Number" value={phone} onChange={(e) => setPhone(e.target.value)} className="w-full p-2 border rounded mt-4" required />
-
-          <h2 className="text-xl font-semibold mt-6 mb-4">Payment Information</h2>
-          <input type="text" placeholder="Card Number" value={cardNumber} onChange={(e) => setCardNumber(e.target.value)} className="w-full p-2 border rounded mb-4" required />
-          <div className="grid grid-cols-2 gap-4">
-            <input type="text" placeholder="MM/YY" value={expDate} onChange={(e) => setExpDate(e.target.value)} className="w-full p-2 border rounded" required />
-            <input type="text" placeholder="CVV" value={cvv} onChange={(e) => setCvv(e.target.value)} className="w-full p-2 border rounded" required />
-          </div>
-          
-          <button type="submit" className="w-full mt-6 bg-black text-white py-2 rounded-lg hover:bg-gray-700">Pay Now</button>
+          <input type="email" name="email" placeholder="Email" onChange={handleChange} required className="w-full p-2 border rounded mb-4" />
+          <input type="text" name="firstName" placeholder="First Name" onChange={handleChange} required className="w-full p-2 border rounded mb-4" />
+          <input type="text" name="lastName" placeholder="Last Name" onChange={handleChange} required className="w-full p-2 border rounded mb-4" />
+          <input type="text" name="address" placeholder="Address" onChange={handleChange} required className="w-full p-2 border rounded mb-4" />
+          <input type="text" name="city" placeholder="City" onChange={handleChange} required className="w-full p-2 border rounded mb-4" />
+          <input type="text" name="state" placeholder="State" onChange={handleChange} required className="w-full p-2 border rounded mb-4" />
+          <input type="text" name="zip" placeholder="Zip Code" onChange={handleChange} required className="w-full p-2 border rounded mb-4" />
+          <input type="text" name="phone" placeholder="Phone Number" onChange={handleChange} required className="w-full p-2 border rounded mb-4" />
+          <button type="submit" className="w-full bg-black text-white py-2 rounded-lg hover:bg-gray-700">Pay Now</button>
         </form>
       </div>
-      
       <div className="bg-white p-6 rounded-lg shadow-md">
         <h2 className="text-xl font-bold mb-4">Order Summary</h2>
-        <div className="mb-4">
-          <div className="flex justify-between">
-            <p>Mineral Illusion Foundation</p>
-            <p>₹2,200.00</p>
+        {cart.length > 0 ? (
+          <div className="space-y-4 max-h-[300px] overflow-y-auto">
+            {cart.map((item) => (
+              <div key={item._id} className="flex items-center gap-4 border-b pb-2">
+                <img className="w-14 h-14 object-cover rounded-md" src={item.image || "/fallback-image.png"} alt={item.name} />
+                <div className="flex-1">
+                  <h2 className="text-sm font-medium">{item.name}</h2>
+                  <p className="text-xs text-gray-500">₹{item.price} × {item.quantity || 1}</p>
+                </div>
+                <p className="text-sm font-semibold">₹{item.price * (item.quantity || 1)}</p>
+              </div>
+            ))}
           </div>
-          <div className="flex justify-between">
-            <p>Eliminate Under Eye Liquid Concealer</p>
-            <p>₹1,700.00</p>
-          </div>
-        </div>
-        <div className="border-t pt-4">
+        ) : (
+          <p className="text-center text-gray-500">Your cart is empty...</p>
+        )}
+        <div className="border-t pt-4 mt-4">
           <div className="flex justify-between">
             <p>Subtotal</p>
-            <p>₹3,900.00</p>
+            <p>₹{subtotal.toFixed(2)}</p>
           </div>
           <div className="flex justify-between text-green-600">
-            <p>Order Discount</p>
-            <p>- ₹780.00</p>
+            <p>Order Discount (20%)</p>
+            <p>- ₹{discount.toFixed(2)}</p>
           </div>
-          <div className="flex justify-between">
-            <p>Shipping</p>
-            <p>Enter shipping address</p>
+          <div className="flex justify-between font-bold">
+            <p>Total</p>
+            <p>₹{total.toFixed(2)}</p>
           </div>
-        </div>
-        <div className="border-t pt-4 font-bold flex justify-between text-xl">
-          <p>Total</p>
-          <p>INR ₹3,120.00</p>
         </div>
       </div>
     </div>
   );
-}
+};
 
-export default OrderPage;
+export default Order;

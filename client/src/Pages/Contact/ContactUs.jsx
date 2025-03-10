@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { FaChevronDown } from "react-icons/fa";
+import { FaChevronDown, FaFacebook, FaInstagram, FaLinkedin } from "react-icons/fa";
 import { NavLink } from "react-router-dom"; // Add this at the top of ProfileMenu.js
 
 
@@ -42,7 +42,7 @@ const ContactUs = () => {
   };
 
   return (
-    <div className="w-full">
+    <div className="w-full mt-27">
       <div className="w-full">
         <div className="grid grid-cols-2 h-[400px] bg-gray-100">
           <div className="h-full">
@@ -114,27 +114,27 @@ const ContactUs = () => {
           <div className="bg-gray-100 p-6 rounded-lg shadow-md">
             <h2 className="text-xl font-semibold mb-4">Company Name</h2>
             <p className="mb-2">
-              <strong>Mobile:</strong> +91 900 000 0000
+              <strong>Mobile:</strong> +91 8978364363
             </p>
             <p className="mb-2">
-              <strong>Email:</strong> info@example.com
+              <strong>Email:</strong> sorainfo@example.com
             </p>
             <p className="mb-2">
-              <strong>WhatsApp:</strong> +91 90000 00000
+              <strong>WhatsApp:</strong> +91 989874635
             </p>
             <p className="mb-4">
-              <strong>Address:</strong> XYZ Pvt. Ltd, New Delhi, India.
+              <strong>Address:</strong> SORA Pvt. Ltd, New Delhi, India.
             </p>
             <h3 className="text-lg font-semibold">Stay Connected</h3>
             <div className="flex space-x-4 mt-2">
               <NavLink to="#" className="text-blue-600 text-2xl">
-                🔗
+                <FaFacebook/>
               </NavLink>
               <NavLink to="#" className="text-red-600 text-2xl">
-                🔗
+                <FaInstagram/>
               </NavLink>
               <NavLink to="#" className="text-blue-400 text-2xl">
-                🔗
+                <FaLinkedin/>
               </NavLink>
             </div>
           </div>

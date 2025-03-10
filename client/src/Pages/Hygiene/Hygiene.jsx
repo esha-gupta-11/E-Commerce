@@ -1,178 +1,88 @@
-import React from 'react'
-import {Card,CardHeader, CardBody, CardFooter, Typography, Button,} from "@material-tailwind/react"
+import { useEffect, useState } from "react";
+import ProductCard from "../../Component/ProductCard/ProductCard";
+import SortDropdown from "../../Component/SortDropdown/SortDropdown";
+import productsData from "../../data/products";
+import CategoryBanner from "../../Component/CatagoryBanner/CategoryBanner";
 
-export default function Hygiene() {
+const Hygiene = () => {
+  const [products, setProducts] = useState([]);
+  const [filteredProducts, setFilteredProducts] = useState([]);
+  const [sortOption, setSortOption] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    // Load products from JSON and filter for Hygiene category
+    const hygieneProducts = productsData.filter(
+      (product) => product.category === "Hygiene"
+    );
+
+    setProducts(hygieneProducts);
+    setFilteredProducts(hygieneProducts);
+    setLoading(false);
+  }, []);
+
+  // Sorting Function
+  const handleSort = (sortKey) => {
+    let sortedProducts = [...filteredProducts];
+
+    switch (sortKey) {
+      case "best_selling":
+        sortedProducts.sort((a, b) => b.sales - a.sales);
+        break;
+      case "new_arrival":
+        sortedProducts.sort((a, b) => new Date(b.date_added) - new Date(a.date_added));
+        break;
+      case "price_low_high":
+        sortedProducts.sort((a, b) => a.price - b.price);
+        break;
+      case "price_high_low":
+        sortedProducts.sort((a, b) => b.price - a.price);
+        break;
+      default:
+        sortedProducts = [...products]; // Reset to original order
+    }
+
+    setSortOption(sortKey);
+    setFilteredProducts(sortedProducts);
+  };
+
   return (
     <>
-       <div className='flex  '>
-      <div className='left-div flex'>
-        <div className='w-[800px] bg-green-50 text-center justify-items-center pt-50 text-5xl '>Hygiene</div>
-      </div>
-      <div className='right-div flex '>
-      <img src="imggg.png.jpg" alt="skincare" srcset=""  className=''/>
-      </div>
+      <div>
+      <CategoryBanner 
+        title="Hygiene" 
+        imageSrc="hygiene.png" 
+        texts={[
+            ["Feel Fresh, Stay Confident!", "Gentle yet effective hygiene solutions designed just for you."],
+            ["Stay Fresh, Feel Confident!", "Hygiene essentials designed just for you."],
+            ["Gentle, Safe & Effective!","Because your intimate care matters."],
+            ["Freshness that Empowers!","Feel clean, stay carefree all day."],
+            ["Clean, Confident, Carefree!","Feel fresh, feel fabulous."]
+        ]} 
+      />
     </div>
 
-    <div className='flex gap-10 flex-wrap  bg-emerald-50 h-full'>
-{/* card  1 */}
-    <Card className="w-80 mt-40 ml-15">
-      <CardHeader shadow={false} floated={false} className="h-64">
-        <img
-          src="bgimg2.png" alt="card-image" className="h-full w-full object-cover"/>
-      </CardHeader>
-      <CardBody>
-        <div className="mb-2 flex items-center justify-between">
-          <Typography color="blue-gray" className="font-medium"> SunScreen</Typography>
-          <Typography color="blue-gray" className="font-medium"> $95.00</Typography>
-        </div>
-        <Typography variant="small"color="gray" className="font-normal opacity-75">
-          With plenty of talk and listen time, voice-activated Siri access, and an available wireless charging case.
-        </Typography>
-      </CardBody>
-      <CardFooter className="pt-0">
-        <Button ripple={false} fullWidth={true} className="bg-black text-white shadow-none hover:scale-105 hover:shadow-none focus:scale-105 focus:shadow-none active:scale-100">Add to Cart
-        </Button>
-      </CardFooter>
-    </Card>
-{/* card  2 */}
-    <Card className="w-80 mt-40">
-      <CardHeader shadow={false} floated={false} className="h-64">
-        <img
-          src="bgimg2.png" alt="card-image" className="h-full w-full object-cover"/>
-      </CardHeader>
-      <CardBody>
-        <div className="mb-2 flex items-center justify-between">
-          <Typography color="blue-gray" className="font-medium"> SunScreen</Typography>
-          <Typography color="blue-gray" className="font-medium"> $95.00</Typography>
-        </div>
-        <Typography variant="small"color="gray" className="font-normal opacity-75">
-          With plenty of talk and listen time, voice-activated Siri access, and an available wireless charging case.
-        </Typography>
-      </CardBody>
-      <CardFooter className="pt-0">
-        <Button ripple={false} fullWidth={true} className="bg-black text-white shadow-none hover:scale-105 hover:shadow-none focus:scale-105 focus:shadow-none active:scale-100">Add to Cart
-        </Button>
-      </CardFooter>
-    </Card>
-{/* card  3 */}
-    <Card className="w-80 mt-40">
-      <CardHeader shadow={false} floated={false} className="h-64">
-        <img
-          src="bgimg2.png" alt="card-image" className="h-full w-full object-cover"/>
-      </CardHeader>
-      <CardBody>
-        <div className="mb-2 flex items-center justify-between">
-          <Typography color="blue-gray" className="font-medium"> SunScreen</Typography>
-          <Typography color="blue-gray" className="font-medium"> $95.00</Typography>
-        </div>
-        <Typography variant="small"color="gray" className="font-normal opacity-75">
-          With plenty of talk and listen time, voice-activated Siri access, and an available wireless charging case.
-        </Typography>
-      </CardBody>
-      <CardFooter className="pt-0">
-        <Button ripple={false} fullWidth={true} className="bg-black text-white shadow-none hover:scale-105 hover:shadow-none focus:scale-105 focus:shadow-none active:scale-100">Add to Cart
-        </Button>
-      </CardFooter>
-    </Card>
-{/* card  4 */}
-    <Card className="w-80 mt-40 ">
-      <CardHeader shadow={false} floated={false} className="h-64">
-        <img
-          src="bgimg2.png" alt="card-image" className="h-full w-full object-cover"/>
-      </CardHeader>
-      <CardBody>
-        <div className="mb-2 flex items-center justify-between">
-          <Typography color="blue-gray" className="font-medium"> SunScreen</Typography>
-          <Typography color="blue-gray" className="font-medium"> $95.00</Typography>
-        </div>
-        <Typography variant="small"color="gray" className="font-normal opacity-75">
-          With plenty of talk and listen time, voice-activated Siri access, and an available wireless charging case.
-        </Typography>
-      </CardBody>
-      <CardFooter className="pt-0">
-        <Button ripple={false} fullWidth={true} className="bg-black text-white shadow-none hover:scale-105 hover:shadow-none focus:scale-105 focus:shadow-none active:scale-100 ">Add to Cart </Button>
-      </CardFooter>
-    </Card>
-{/* card  5*/}
-    <Card className="w-80 mt-10 ml-15">
-      <CardHeader shadow={false} floated={false} className="h-64">
-        <img
-          src="bgimg2.png" alt="card-image" className="h-full w-full object-cover"/>
-      </CardHeader>
-      <CardBody>
-        <div className="mb-2 flex items-center justify-between">
-          <Typography color="blue-gray" className="font-medium"> SunScreen</Typography>
-          <Typography color="blue-gray" className="font-medium"> $95.00</Typography>
-        </div>
-        <Typography variant="small"color="gray" className="font-normal opacity-75">
-          With plenty of talk and listen time, voice-activated Siri access, and an available wireless charging case.
-        </Typography>
-      </CardBody>
-      <CardFooter className="pt-0">
-        <Button ripple={false} fullWidth={true} className="bg-black text-white shadow-none hover:scale-105 hover:shadow-none focus:scale-105 focus:shadow-none active:scale-100">Add to Cart
-        </Button>
-      </CardFooter>
-    </Card>
-{/* card  6 */}
-    <Card className="w-80 mt-10 ">
-      <CardHeader shadow={false} floated={false} className="h-64">
-        <img
-          src="bgimg2.png" alt="card-image" className="h-full w-full object-cover"/>
-      </CardHeader>
-      <CardBody>
-        <div className="mb-2 flex items-center justify-between">
-          <Typography color="blue-gray" className="font-medium"> SunScreen</Typography>
-          <Typography color="blue-gray" className="font-medium"> $95.00</Typography>
-        </div>
-        <Typography variant="small"color="gray" className="font-normal opacity-75">
-          With plenty of talk and listen time, voice-activated Siri access, and an available wireless charging case.
-        </Typography>
-      </CardBody>
-      <CardFooter className="pt-0">
-        <Button ripple={false} fullWidth={true} className="bg-black text-white shadow-none hover:scale-105 hover:shadow-none focus:scale-105 focus:shadow-none active:scale-100 ">Add to Cart </Button>
-      </CardFooter>
-    </Card>
+      {/* Sort Dropdown */}
+      <div className="flex justify-end mt-4 mb-6 px-5">
+        <SortDropdown handleSort={handleSort} />
+      </div>
 
-    {/* card  7 */}
-    <Card className="w-80 mt-10">
-      <CardHeader shadow={false} floated={false} className="h-64">
-        <img
-          src="bgimg2.png" alt="card-image" className="h-full w-full object-cover"/>
-      </CardHeader>
-      <CardBody>
-        <div className="mb-2 flex items-center justify-between">
-          <Typography color="blue-gray" className="font-medium"> SunScreen</Typography>
-          <Typography color="blue-gray" className="font-medium"> $95.00</Typography>
+      {/* Loading State */}
+      {loading ? (
+        <p className="text-center text-lg">Loading products...</p>
+      ) : (
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-6 p-5">
+          {filteredProducts.length > 0 ? (
+            filteredProducts.map((product) => (
+              <ProductCard key={product.id} product={product} />
+            ))
+          ) : (
+            <p className="text-center text-lg col-span-4">No hygiene products available.</p>
+          )}
         </div>
-        <Typography variant="small"color="gray" className="font-normal opacity-75">
-          With plenty of talk and listen time, voice-activated Siri access, and an available wireless charging case.
-        </Typography>
-      </CardBody>
-      <CardFooter className="pt-0">
-        <Button ripple={false} fullWidth={true} className="bg-black text-white shadow-none hover:scale-105 hover:shadow-none focus:scale-105 focus:shadow-none active:scale-100">Add to Cart
-        </Button>
-      </CardFooter>
-    </Card>
-{/* card  8*/}
-    <Card className="w-80 mt-10 ">
-      <CardHeader shadow={false} floated={false} className="h-64">
-        <img
-          src="bgimg2.png" alt="card-image" className="h-full w-full object-cover"/>
-      </CardHeader>
-      <CardBody>
-        <div className="mb-2 flex items-center justify-between">
-          <Typography color="blue-gray" className="font-medium"> SunScreen</Typography>
-          <Typography color="blue-gray" className="font-medium"> $95.00</Typography>
-        </div>
-        <Typography variant="small"color="gray" className="font-normal opacity-75">
-          With plenty of talk and listen time, voice-activated Siri access, and an available wireless charging case.
-        </Typography>
-      </CardBody>
-      <CardFooter className="pt-0">
-        <Button ripple={false} fullWidth={true} className="bg-black text-white shadow-none hover:scale-105 hover:shadow-none focus:scale-105 focus:shadow-none active:scale-100 ">Add to Cart </Button>
-      </CardFooter>
-    </Card>
-  </div>
+      )}
     </>
-  )
-}
+  );
+};
+
+export default Hygiene;

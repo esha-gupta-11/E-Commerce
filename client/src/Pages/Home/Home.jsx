@@ -43,7 +43,7 @@ export default function Home({ onClose }) {
       <div className="mt-[7.3rem]">
         {/* Auto-swiping Carousel */}
         <Carousel autoplay autoplayDelay={3000} loop className="w-full h-[40vh] sm:h-[50vh] lg:h-[60vh]">
-          {["bg1.png", "bgimg4.png", "bgimg3.png", "5g.png"].map((src, idx) => (
+          {["bg1.png", "bgimg4.png", "bgimg3.png", "Skincareimg.png"].map((src, idx) => (
             <img key={idx} src={src} alt={`slide ${idx + 1}`} className="w-full h-full object-cover" />
           ))}
         </Carousel>

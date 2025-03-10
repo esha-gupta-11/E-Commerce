@@ -7,7 +7,7 @@ const AboutUs = () => {
   );
 
   return (
-    <div className=" text-black min-h-screen flex items-center justify-center px-4 mt-2.5">
+    <div className=" text-black min-h-screen flex items-center justify-center px-4 mt-29">
       <div className="max-w-6xl mx-auto px-8 py-12 bg-white rounded-2xl flex flex-col items-center">
         <h1 className="text-5xl text-center text-black mb-8">About Us</h1>
         

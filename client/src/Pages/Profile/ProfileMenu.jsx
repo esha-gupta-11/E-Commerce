@@ -19,10 +19,10 @@ const ProfileMenu = ({ onClose }) => {
         
         >Personal Details</NavLink>
         <NavLink to="/Order" className="block px-4 py-2 font-light hover:bg-gray-100">Orders</NavLink>
-        <NavLink to="/tira-treats" className="block px-4 py-2 font-light hover:bg-gray-100">Sora Treats</NavLink>
+        
       
         <NavLink to="/AboutUs" className="block px-4 py-2 font-light hover:bg-gray-100">About Us</NavLink>
-        <hr className="my-1 border-gray-400 border-t mt-6" />
+       
         <NavLink 
   to="/ContactUs"
   className="block px-4 py-2 font-light hover:bg-gray-100"

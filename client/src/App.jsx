@@ -16,11 +16,15 @@ import ProfileMenu from "./Pages/Profile/ProfileMenu";
 import Login from "./Pages/Login/Login";
 import Signup from "./Pages/Signup/SignUp";
 import ForgetPassword from "./Pages/ForgetPassword/ForgetPassword";
-import OtpVerification from "./Pages/Otp/OtpVerification"; // ✅ OTP Page Import
+import OtpVerification from "./Pages/Otp/OtpVerification"; 
 import ContactUs from "./Pages/Contact/ContactUs";
 import AboutUs from "./Pages/About/About";
 import Profile from "./Pages/Profile/Profile";
 import Wishlist from "./Pages/Wishlist/Wishlist";
+import PrivacyPolicy from "./Pages/PrivicyPolicy/PrivicyPolicy";
+import RefundPolicy from "./Pages/Refund/Refund";
+import ReturnCancellationPolicy from "./Pages/ReturnPolicy/ReturnCancellationPolicy";
+import TermsOfService from "./Pages/TermsOfService/TermsOfService";
 
 const App = () => {
   return (
@@ -44,9 +48,14 @@ const App = () => {
           <Route path="/login" element={<Login />} />
           <Route path="/signUp" element={<Signup />} />
           <Route path="/forgetpassword" element={<ForgetPassword />} />
-          <Route path="/otp-verification" element={<OtpVerification />} /> {/* ✅ OTP Page Route */}
+          <Route path="/otp-verification" element={<OtpVerification />} /> 
           <Route path="/contact" element={<ContactUs />} />
           <Route path="/about" element={<AboutUs />} />
+          <Route path="/privicyPolicy" element={<PrivacyPolicy />} />
+          <Route path="/refundPolicy" element={<RefundPolicy />} />
+          <Route path="/returnAndCancellationPolicy" element={<ReturnCancellationPolicy />} />
+          <Route path="termOfService" element={<TermsOfService/>}/>
+          
         </Routes>
 
         <Footer />

@@ -1,61 +1,81 @@
 import React, { useState, useRef, useEffect } from "react";
-import { FaHeart, FaSearch, FaShoppingCart, FaUser } from "react-icons/fa";
-import { NavLink, useNavigate } from "react-router-dom";
+import { FaHeart, FaShoppingCart, FaUser } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 import Cart from "../../Pages/Cart/Cart";
 import ProfileMenu from "../../Pages/Profile/ProfileMenu";
-import "./Navbar.css";
+import DropdownMenu from "./DropdownMenu";
 import SearchBar from "../SearchBar/SearchBar";
+import useStore from "../../Context/StoreContext";
 
 const Navbar = () => {
   const [showCart, setShowCart] = useState(false);
   const [showProfile, setShowProfile] = useState(false);
-  const [wishlistClicked, setWishlistClicked] = useState(false); // State for Wishlist click
+  const [wishlistClicked, setWishlistClicked] = useState(false);
   const cartRef = useRef(null);
   const profileRef = useRef(null);
   const navigate = useNavigate();
 
-  // Cart Hover
-  const handleCartEnter = () => setShowCart(true);
-  const handleCartLeave = () => setShowCart(false);
+  const categories = [
+    { title: "Skin Care", mainPath: "/skinCare", items: [
+      { name: "Face Wash", path: "/skincare/facewash" },
+      { name: "Sunscreens", path: "/skincare/sunscreens" },
+      { name: "Moisturizer", path: "/skincare/moisturizer" },
+      { name: "Toner", path: "/skincare/toner" },
+      { name: "Serum", path: "/skincare/serum" },
+    ]},
+    { title: "Personal Care", mainPath: "/personalcare", items: [
+      { name: "Body Wash", path: "/personalcare/bodywash" },
+      { name: "Deodorants", path: "/personalcare/deodorants" },
+    ]},
+    { title: "Hair Care", mainPath: "/haircare", items: [
+      { name: "Shampoo", path: "/haircare/shampoo" },
+      { name: "Conditioner", path: "/haircare/conditioner" },
+      { name: "Hair Oil", path: "/haircare/hairOil" },
+      { name: "Hair Serum", path: "/haircare/hairSerum" },
+    ]},
+    { title: "Hygiene", mainPath: "/hygiene", items: [
+      { name: "Shower Gel", path: "/hygiene/ShowerGel" },
+      { name: "Perfume", path: "/hygiene/Perfume" },
+      { name: "Body Srub", path: "/hygiene/BodySrub" },
+    ]},
+    { title: "Lip Care", mainPath: "/lipcare", items: [
+      { name: "Lip Balm", path: "/lipcare/lipbalm" },
+      { name: "Lip Tint", path: "/lipcare/liptint" },
+    ]}
+  ];
 
-  // Profile Hover
-  const handleProfileEnter = () => setShowProfile(true);
-  const handleProfileLeave = () => setShowProfile(false);
+  const { cart } = useStore();
+  const cartItemCount = cart.reduce((acc, item) => acc + item.quantity, 0);
 
-  // Click outside to close menus only if no selection is made
+
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (cartRef.current && !cartRef.current.contains(event.target) && showCart) {
         setShowCart(false);
       }
-
       if (profileRef.current && !profileRef.current.contains(event.target) && showProfile) {
         setShowProfile(false);
       }
     };
-
     document.addEventListener("mousedown", handleClickOutside);
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [showCart, showProfile]);
 
-  // Handle logo click to navigate to the home page and scroll to the top
   const handleLogoClick = () => {
     navigate("/");
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
-  // Handle Wishlist click to navigate to the Wishlist page and change icon color
   const handleWishlistClick = () => {
     setWishlistClicked(true);
     navigate("/wishlist");
   };
 
   return (
-    <nav className="fixed top-[44.3px] left-0 w-full bg-white/30 backdrop-blur-lg shadow-md z-[100]">
+    <nav className="fixed top-0 left-0 w-full mt-9 bg-white/30 backdrop-blur-lg shadow-md z-50 hover:bg-white transition">
       <div className="flex justify-between items-center px-6 sm:px-10 py-3">
-        {/* Logo with click event */}
         <img
           className="h-10 sm:h-12 cursor-pointer"
           src="/Sora.png"
@@ -63,43 +83,29 @@ const Navbar = () => {
           onClick={handleLogoClick}
         />
 
-        {/* Navigation Links */}
         <ul className="hidden sm:flex gap-6 lg:gap-10">
-          {[
-            { name: "SkinCare", path: "/skinCare" },
-            { name: "Hygiene", path: "/hygiene" },
-            { name: "Personal Care", path: "/personalcare" },
-            { name: "Hair Care", path: "/haircare" },
-            { name: "Lip Care", path: "/lipcare" },
-          ].map((item) => (
-            <li key={item.name}>
-              <NavLink to={item.path} className="hover:text-gray-500 transition">
-                {item.name}
-              </NavLink>
-            </li>
+          {categories.map((category) => (
+            <div key={category.title} className="relative group">
+              <DropdownMenu title={category.title} mainPath={category.mainPath} items={category.items} />
+              <span className="absolute left-0 bottom-[-2px] w-0 h-[2px] bg-black transition-all duration-300 group-hover:w-full"></span>
+            </div>
           ))}
         </ul>
 
-        {/* Icons Section */}
         <div className="flex gap-5 sm:gap-7 relative items-center">
           <SearchBar />
-
-          {/* Wishlist */}
           <FaHeart
-            className={`text-lg sm:text-xl cursor-pointer transition ${
-              wishlistClicked ? "text-gray-700" : "hover:text-gray-700"
-            }`}
+            className={`text-lg sm:text-xl cursor-pointer transition ${wishlistClicked ? "text-gray-700" : "hover:text-gray-700"}`}
             onClick={handleWishlistClick}
           />
 
-          {/* Cart Section */}
-          <div
-            className="relative"
-            ref={cartRef}
-            onMouseEnter={handleCartEnter}
-            onMouseLeave={handleCartLeave}
-          >
+<div className="relative" ref={cartRef} onMouseEnter={() => setShowCart(true)} onMouseLeave={() => setShowCart(false)}>
             <FaShoppingCart className="text-lg sm:text-xl cursor-pointer hover:text-gray-700 transition" />
+            {cartItemCount > 0 && (
+              <span className="absolute -top-1 -right-2 bg-red-500 text-white text-[12px] w-4 h-4 flex items-center justify-center rounded-full">
+                {cartItemCount}
+              </span>
+            )}
             {showCart && (
               <div className="absolute right-0 mt-2 w-64 sm:w-80 bg-white p-4 sm:p-6 rounded-lg shadow-lg">
                 <Cart />
@@ -107,13 +113,7 @@ const Navbar = () => {
             )}
           </div>
 
-          {/* Profile Section */}
-          <div
-            className="relative"
-            ref={profileRef}
-            onMouseEnter={handleProfileEnter}
-            onMouseLeave={handleProfileLeave}
-          >
+          <div className="relative" ref={profileRef} onMouseEnter={() => setShowProfile(true)} onMouseLeave={() => setShowProfile(false)}>
             <FaUser className="text-lg sm:text-xl cursor-pointer hover:text-gray-500 transition" />
             {showProfile && (
               <div className="absolute right-0 mt-2 bg-white p-3 sm:p-4 rounded-lg shadow-md">
