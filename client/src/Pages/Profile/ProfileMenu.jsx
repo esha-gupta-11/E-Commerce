@@ -24,14 +24,14 @@ const ProfileMenu = ({ onClose }) => {
         <NavLink to="/about" className="block px-4 py-2 font-light hover:bg-gray-100">About Us</NavLink>
        
         <NavLink 
-  to="/contactUs"
+  to="/contact"
   className="block px-4 py-2 font-light hover:bg-gray-100"
   onClick={onClose} // This will close the menu when clicked
 >
   Contact Us
 </NavLink>
-        <NavLink to="/termOfService" className="block px-4 py-2 font-light hover:bg-gray-100">Help & Support</NavLink>
-        <NavLink to="/privacyPolicy" className="block px-4 py-2 font-light hover:bg-gray-100">Privacy Policy</NavLink>
+        <NavLink to="/termOfService" className="block px-4 py-2 font-light hover:bg-gray-100">Terms of Service</NavLink>
+        <NavLink to="/privicyPolicy" className="block px-4 py-2 font-light hover:bg-gray-100">Privacy Policy</NavLink>
         <NavLink to="/logout" className="block px-4 py-2 text-black hover:bg-gray-100 rounded-lg">Logout</NavLink>
       </ul>
     </div>
