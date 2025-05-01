@@ -1,2 +1,3 @@
 # E-Commerce
-Sora - E-Commerce Website
+Sora - E-Commerce Website for skincare 
+
