@@ -55,7 +55,7 @@ const Order = () => {
           <div className="space-y-4 max-h-[300px] overflow-y-auto">
             {cart.map((item) => (
               <div key={item._id} className="flex items-center gap-4 border-b pb-2">
-                <img className="w-14 h-14 object-cover rounded-md" src={item.image || "/fallback-image.png"} alt={item.name} />
+                <img className="w-14 h-14 object-cover rounded-md" src={item.image || item.image_link || "/fallback-image.png"} alt={item.name} />
                 <div className="flex-1">
                   <h2 className="text-sm font-medium">{item.name}</h2>
                   <p className="text-xs text-gray-500">₹{item.price} × {item.quantity || 1}</p>

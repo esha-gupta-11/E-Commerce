@@ -2,10 +2,10 @@ import { create } from "zustand";
 
 const useStore = create((set, get) => ({
   cart: [],
+  wishlist: [], // ✅ Wishlist state added
 
   addToCart: (product) =>
     set((state) => {
-      // ✅ Ensure unique ID handling
       const productId = product.id || product._id || product.sku || product.name;
 
       if (!productId) {
@@ -17,7 +17,6 @@ const useStore = create((set, get) => ({
 
       if (existingItem) {
         return {
-          
           cart: state.cart.map((item) =>
             item.uniqueId === productId ? { ...item, quantity: item.quantity + 1 } : item
           ),
@@ -40,6 +39,27 @@ const useStore = create((set, get) => ({
 
   getTotalCartAmount: () =>
     get().cart.reduce((total, item) => total + (Number(item.price) || 0) * item.quantity, 0),
+
+  // ✅ Wishlist Functions
+  addToWishlist: (product) =>
+    set((state) => {
+      const productId = product.id || product._id || product.sku || product.name;
+      if (!productId) return state;
+
+      // Check if product already exists
+      const exists = state.wishlist.some((item) => item.uniqueId === productId);
+      if (exists) return state;
+
+      return { wishlist: [...state.wishlist, { ...product, uniqueId: productId }] };
+    }),
+
+  removeFromWishlist: (productId) =>
+    set((state) => ({
+      wishlist: state.wishlist.filter((item) => item.uniqueId !== productId),
+    })),
+
+  isProductInWishlist: (productId) =>
+    get().wishlist.some((item) => item.uniqueId === productId),
 }));
 
 export default useStore;

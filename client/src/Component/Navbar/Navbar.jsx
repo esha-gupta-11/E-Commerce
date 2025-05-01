@@ -107,18 +107,18 @@ const Navbar = () => {
               </span>
             )}
             {showCart && (
-              <div className="absolute right-0 mt-2 w-64 sm:w-80 bg-white p-4 sm:p-6 rounded-lg shadow-lg">
+              <div className="absolute right-0  w-64 sm:w-80 bg-white p-4 sm:p-6 rounded-lg shadow-lg">
                 <Cart />
               </div>
             )}
           </div>
 
-          <div className="relative" ref={profileRef} onMouseEnter={() => setShowProfile(true)} onMouseLeave={() => setShowProfile(false)}>
+          <div className="relative " ref={profileRef} onMouseEnter={() => setShowProfile(true)} onMouseLeave={() => setShowProfile(false)}  >
             <FaUser className="text-lg sm:text-xl cursor-pointer hover:text-gray-500 transition" />
             {showProfile && (
-              <div className="absolute right-0 mt-2 bg-white p-3 sm:p-4 rounded-lg shadow-md">
+             
                 <ProfileMenu onClose={() => setShowProfile(false)} />
-              </div>
+             
             )}
           </div>
         </div>

@@ -7,7 +7,7 @@ const ProfileMenu = ({ onClose }) => {
     const navigate = useNavigate();
   return (
     <div 
-      className="absolute right-0 mt-2 w-70 bg-white border border-gray-200 rounded-lg shadow-xl z-50"
+      className="absolute right-0  w-70 bg-white border border-gray-200 rounded-lg shadow-xl z-50"
       onClick={() => console.log("Hovered menu")} 
       onMouseLeave={onClose} // Close menu when leaving it
     >

@@ -3,7 +3,7 @@ import ProductCard from "../../Component/ProductCard/ProductCard";
 import SortDropdown from "../../Component/SortDropdown/SortDropdown";
 import FilterSidebar from "../../Component/FilterSidebar/FilterSidebar";
 import useStore from "../../Context/StoreContext"; // ✅ Zustand store import
-import productsData from "../../data/products.js";
+import productsData from "../../data/products";
 
 const AllProduct = () => {
   const [products, setProducts] = useState([]);
@@ -80,7 +80,7 @@ const AllProduct = () => {
         <h1 className="text-center text-5xl mt-12">All Categories</h1>
 
         <div
-          className={`transition-all duration-300 ${
+          className={`transition-all duration-300 mt-10 ${
             isSticky
               ? "sticky top-[108px] z-[999] h-15 bg-white px-5 py-2 "
               : "mt-4"
@@ -92,9 +92,9 @@ const AllProduct = () => {
         <div className="max-w-screen-xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-6 gap-y-12 px-8 mt-6">
           {filteredProducts.length > 0 ? (
             filteredProducts.map((product) => (
-              <ProductCard 
-                key={product.id} 
-                product={product} 
+              <ProductCard
+                key={product.id}
+                product={product}
                 onAddToCart={() => addToCart(product)} // ✅ Zustand function directly call kiya
               />
             ))
